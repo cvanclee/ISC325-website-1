@@ -37,26 +37,22 @@
     <script>      
       function getLocation() {
         if (navigator.geolocation) {
-          initialLocation = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+          
         } else { 
           x.innerHTML = "Geolocation is not supported by this browser.";
         }
       }
-    </script>
-    
-    <div id="googleMap" style="width:100%;height:400px;"></div>
-   
-    <script>
+      
       function myMap() {
         var mapProp= {
-          center:new google.maps.LatLng(initialLocation),        
+          center:new google.maps.LatLng(position.coords.latitude, position.coords.longitude),        
           zoom:5,     
         };         
         var map=new google.maps.Map(document.getElementById("googleMap"),mapProp);
       }
-</script>
-
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC3LF6-n6pKpmLkdGR8VZ5SxOOaq0yE2wc&callback=myMap"></script>
+    </script>    
+    <div id="googleMap" style="width:50%;height:400px;"></div>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC3LF6-n6pKpmLkdGR8VZ5SxOOaq0yE2wc&callback=myMap"></script>
     <!-- AIzaSyC3LF6-n6pKpmLkdGR8VZ5SxOOaq0yE2wc -->
     
     <h2>How to Play</h2>
