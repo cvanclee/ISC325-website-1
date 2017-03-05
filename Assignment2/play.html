@@ -55,16 +55,98 @@
     
     <div id="map" style="width:400px;height:400px;"></div>
 
-    <script>
-      function myMap() {
-        var mapOptions = {
-          center: new google.maps.LatLng(51.5, -0.12),
-          zoom: 10,
-          mapTypeId: google.maps.MapTypeId.HYBRID
+    
+        var myCenter=new google.maps.LatLng(37.455840,-100.150997);
+
+        var attachClickHandlerForPins = function(
+            marker, map, clubName, addressLine1,
+            addressCityState, phoneNumber,
+            clubDetailsHref)
+        {
+            var info = "<b>" + clubName + "</b><br/>"+ addressLine1+ "<br/>" + addressCityState+"<br/>"+phoneNumber + "<br/>";
+            info += "<a href='"+clubDetailsHref+"?embedded="+"true"+"'>View More Details</a>";
+            var infowindow = new google.maps.InfoWindow({
+                content: info
+            });
+            google.maps.event.addListener(
+                    marker,
+                    'click',
+                    function(){
+                        infowindow.open(map,marker);
+                    }
+            );
+        };
+
+        function initialize()
+        {
+            var mapProp = {
+                center: myCenter,
+                zoom:4,
+                mapTypeId: google.maps.MapTypeId.ROADMAP
+            };
+            var map = new google.maps.Map(document.getElementById("googleMap"),mapProp);
+
+            //iterating over differnet clubs
+            for (var i = 0; i < markerData.length; i++){
+                var currentClubData = markerData[i];
+                var clubName = currentClubData['markerName'];
+                var address = currentClubData['address'];
+
+                var addressLine1 = currentClubData['addressLine1'];
+                var addressCityState = currentClubData['addressCityState'];
+                var phoneNumber = currentClubData['phoneNumber'];
+                var clubDetailsHref = currentClubData['clubDetailsHref'];
+
+                var currentLat = currentClubData['markerLatitude'];
+                var currentLong = currentClubData['markerLongitude'];
+                var markerPosition = new google.maps.LatLng(currentLat,currentLong);
+
+                var image = {
+                    url: '/static/images/map-marker.png',
+                    // This marker is 20 pixels wide by 32 pixels tall.
+                    size: new google.maps.Size(15, 15),
+
+                    // The origin for this image is 0,0.
+                    //origin: new google.maps.Point(0,0),
+                    // The anchor for this image is the base of the flagpole at 0,32.
+                    //anchor: new google.maps.Point(0, 32),
+
+                    height: 10,
+                    width: 10
+
+                };
+
+                var circle ={
+                    path: google.maps.SymbolPath.CIRCLE,
+                    fillColor: 'red',
+                    fillOpacity: 1.0,
+                    scale: 3.0,
+                    strokeColor: 'white',
+                    strokeWeight: 1
+                };
+
+                //Creating pin
+                var marker = new google.maps.Marker({
+                    position: markerPosition,
+                    icon :    circle
+
+                });
+
+                //info window
+                var infowindow = new google.maps.InfoWindow({
+                    content: clubName
+                });
+                // attaching event handler
+                attachClickHandlerForPins(
+                        marker, map, clubName, addressLine1, addressCityState,
+                        phoneNumber, clubDetailsHref);
+
+                marker.setMap(map);
+
+            }
         }
-      var map = new google.maps.Map(document.getElementById("map"), mapOptions);
-      }
-    </script>
+        google.maps.event.addDomListener(window, 'load', initialize);
+    
     
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC3LF6-n6pKpmLkdGR8VZ5SxOOaq0yE2wc&callback=myMap"></script>
     <!-- AIzaSyC3LF6-n6pKpmLkdGR8VZ5SxOOaq0yE2wc -->
