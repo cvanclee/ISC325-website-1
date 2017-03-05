@@ -40,63 +40,35 @@
       var infowindow;
       var initialLocation;
          
-      function getLocation() {   
-        /*
-        if (navigator.geolocation) {  
-          navigator.geolocation.getCurrentPosition(function (position) {                  
-            var initialLocation = {
-              lat: position.coords.latitude,
-              lng: position.coords.longitude
-            };            
-            map.setCenter(initialLocation);
-          });
-          var mapProp= {     
-            zoom:12,     
-          };         
-          
-          map=new google.maps.Map(document.getElementById("googleMap"),mapProp);         
-          infowindow = new google.maps.InfoWindow();                              
-          var pyr = new google.maps.LatLng(initialLocation);
-          var request = {                      
-            location: pyr,                
-            radius: '49999',                    
-            query: 'badminton'             
-          };                
-          var service = new google.maps.places.PlacesService(map);               
-          service.textSearch(request, callback);    
-                   
-          google.maps.event.addListener(map, 'idle', function() {
-            updateMap();
-          });
-          */
-               
-        if (navigator.geolocation) {
-        
-          navigator.geolocation.getCurrentPosition(function (position) {                        
-          var initialLocation = {       
+      function getLocation() {                         
+        if (navigator.geolocation) {              
+          navigator.geolocation.getCurrentPosition(function (position) {                               
+            var initialLocation = {       
             lat: position.coords.latitude,      
             lng: position.coords.longitude      
-          };                 
-          map.setCenter(initialLocation);     
-          var service = new google.maps.places.PlacesService(map);         
-          var pyr = initialLocation;    
-          var request = {                 
-            location: pyr,          
-            radius: '49999',               
-            query: 'gym'                 
-          };                    
-          service.textSearch(request, callback);
-        });
-        var mapProp= {        
-          zoom:12,      
-        };           
-                map=new google.maps.Map(document.getElementById("googleMap"),mapProp);         
-        infowindow = new google.maps.InfoWindow();           
+          };                                             
+            map.setCenter(initialLocation);              
+            var service = new google.maps.places.PlacesService(map);                
+            var pyr = initialLocation;             
+            var request = {                         
+              location: pyr,                 
+              radius: '49999',                      
+              query: 'gym'                 
+          };                           
+            service.textSearch(request, callback);     
+          });   
+          var mapProp= {              
+            zoom:12,            
+          };                     
+          map=new google.maps.Map(document.getElementById("googleMap"),mapProp);                 
+          infowindow = new google.maps.InfoWindow(); 
+          
+          google.maps.event.addListener(map, 'idle', function() {          
+            updateMap();         
+          });
         } else {    
    
-        }   
-       
-   
+        }             
       }           
       
       function updateMap(){
@@ -151,4 +123,4 @@
     </address>
     
   </body>
-</html>
+</html>   
