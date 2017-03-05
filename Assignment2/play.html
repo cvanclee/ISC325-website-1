@@ -41,8 +41,7 @@
       var initialLocation;
       
       function getLocation() {        
-        if (navigator.geolocation) { 
-          map=new google.maps.Map(document.getElementById("googleMap"),mapProp);
+        if (navigator.geolocation) {         
           navigator.geolocation.getCurrentPosition(function (position) {      
             initialLocation = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);         
             map.setCenter(initialLocation);
@@ -50,7 +49,7 @@
           var mapProp= {     
             zoom:12,     
           };         
-                   
+          map=new google.maps.Map(document.getElementById("googleMap"),mapProp);         
           infowindow = new google.maps.InfoWindow();      
           var service = new google.maps.places.PlacesService(map);       
           //var pyr = new google.maps.LatLng(initialLocation.lat(),initialLocation.lng());
