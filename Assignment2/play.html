@@ -50,9 +50,7 @@
             zoom:12,     
           };         
           map=new google.maps.Map(document.getElementById("googleMap"),mapProp);         
-          infowindow = new google.maps.InfoWindow();        
-          //makeReq()
-                     
+          infowindow = new google.maps.InfoWindow();                           
           var pyr = new google.maps.LatLng(map.getCenter());                
           var request = {              
           location: pyr,        
@@ -60,17 +58,10 @@
           query: 'badminton'             
           };                
           var service = new google.maps.places.PlacesService(map);               
-          service.textSearch(request, callback); 
-          
-          
-          //google.maps.event.addListener(map, 'idle', makeReq());
+          service.textSearch(request, callback);           
         } else {
     
         }
-      }
-      
-      function makeReq(){  
-         
       }                                
                                         
       function callback(results, status) {
