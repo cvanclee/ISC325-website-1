@@ -65,17 +65,7 @@
           
           google.maps.event.addListener(map, 'idle', function() {          
             updateMap();         
-          });
-          
-          
-          google.maps.event.addListener(marker, 'click', function() {
-              infowindow.setContent('<div><strong>' + place.name + '</strong><br>' +
-                'Place ID: ' + place.place_id + '<br>' +
-                place.formatted_address + '</div>');
-              infowindow.open(map, this);
-            });
-          
-          
+          });                    
         } else {    
    
         }             
