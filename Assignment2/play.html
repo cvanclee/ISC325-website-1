@@ -61,7 +61,8 @@
           
         } else { 
           var mapProp= {
-            center:new google.maps.LatLng(40.7128,-74.0059),        
+            initialLocation = new google.maps.LatLng(40.7128,-74.0059);
+            map.setCenter(initialLocation);     
             zoom:8,     
           };         
           map=new google.maps.Map(document.getElementById("googleMap"),mapProp);       
