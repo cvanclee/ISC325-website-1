@@ -60,22 +60,7 @@
           var service = new google.maps.places.PlacesService(map);       
           service.textSearch(request, callback);          
         } else {
-          document.write("Hello World!");
-          var mapProp= {   
-            zoom:8,     
-          };         
-          map=new google.maps.Map(document.getElementById("googleMap"),mapProp); 
-          initialLocation = new google.maps.LatLng(40.7128,-74.0059);
-          map.setCenter(initialLocation);  
-          infowindow = new google.maps.InfoWindow();      
-          var pyr = {lat: 40.7128, lng: -74.0059};
-          var request = {    
-            location: pyr,
-            radius: '49999',   
-            query: 'badminton'
-          };
-          var service = new google.maps.places.PlacesService(map);       
-          service.textSearch(request, callback);
+    
         }
       }
       
