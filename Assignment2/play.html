@@ -34,19 +34,13 @@
     However, this is only a good idea if you are not interested in playing competitively. Outdoor play
     is completely different than playing indoors, and is a much less enjoyable experience for serious play.</p>
     
-    <script>
-      
+    <script>      
       function getLocation() {
         if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(showPosition);
+        initialLocation = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
         } else { 
           x.innerHTML = "Geolocation is not supported by this browser.";
         }
-      }
-      
-      function showPosition(position) {
-        x.innerHTML = "Latitude: " + position.coords.latitude + 
-        "<br>Longitude: " + position.coords.longitude;
       }
     </script>
     
@@ -54,7 +48,6 @@
     <script>
       function myMap() {
         var mapOptions = {
-          initialLocation = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
           map.setCenter(initialLocation);
           zoom: 10,
           mapTypeId: google.maps.MapTypeId.HYBRID
