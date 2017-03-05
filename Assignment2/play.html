@@ -43,7 +43,12 @@
       function getLocation() {        
         if (navigator.geolocation) {  
           navigator.geolocation.getCurrentPosition(function (position) {      
-            initialLocation = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);         
+            
+            var initialLocation = {
+              lat: position.coords.latitude,
+              lng: position.coords.longitude
+            };
+            
             map.setCenter(initialLocation);
           });
           var mapProp= {     
