@@ -72,6 +72,7 @@
       }           
       
       function updateMap(){
+        if (navigator.geolocation) {   
         navigator.geolocation.getCurrentPosition(function (position) {                               
             var initialLocation = {       
             lat: position.coords.latitude,      
@@ -87,6 +88,7 @@
             };                                      
             service.textSearch(request, callback);              
           });
+        }
       }
                                         
       function callback(results, status) {
