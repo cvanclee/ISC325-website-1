@@ -41,8 +41,7 @@
       var initialLocation;
       
       function getLocation() {        
-        if (navigator.geolocation) {
-           document.write("Hello World!");
+        if (navigator.geolocation) {  
           navigator.geolocation.getCurrentPosition(function (position) {      
             initialLocation = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);         
             map.setCenter(initialLocation);
@@ -61,6 +60,7 @@
           var service = new google.maps.places.PlacesService(map);       
           service.textSearch(request, callback);          
         } else {
+          document.write("Hello World!");
           var mapProp= {   
             zoom:8,     
           };         
