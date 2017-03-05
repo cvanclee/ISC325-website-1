@@ -43,10 +43,10 @@
       function getLocation() {                         
         if (navigator.geolocation) {              
           navigator.geolocation.getCurrentPosition(function (position) {                               
-            var initialLocation = {       
-            lat: position.coords.latitude,      
-            lng: position.coords.longitude      
-          };                                             
+            var initialLocation = {               
+              lat: position.coords.latitude,                 
+              lng: position.coords.longitude      
+          };                                                    
             map.setCenter(initialLocation);              
             var service = new google.maps.places.PlacesService(map);                          
             var pyr = initialLocation;             
@@ -71,17 +71,16 @@
         }             
       }           
       
-      function updateMap(){         
+      function updateMap(){
+        var initial;
         navigator.geolocation.getCurrentPosition(function (position) {                               
-            var initialLocation = {       
-            lat: position.coords.latitude,      
-            lng: position.coords.longitude      
-          };                                             
+            initial = new google.maps.LatLng(map.getCenter());      
+                                                       
             //map.setCenter(initialLocation);              
             var service = new google.maps.places.PlacesService(map);                          
-            var pyr = initialLocation;             
+            var pyrd = initial;             
             var request = {                         
-              location: pyr,                 
+              location: pyrd,                 
               radius: '49999',                      
               query: 'badminton'                                
             };                                               
