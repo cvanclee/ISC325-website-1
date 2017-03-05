@@ -37,26 +37,26 @@
     <script>      
       function getLocation() {
         if (navigator.geolocation) {
-        initialLocation = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+          initialLocation = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
         } else { 
           x.innerHTML = "Geolocation is not supported by this browser.";
         }
       }
     </script>
     
-    <div id="map" style="width:400px;height:400px;background:yellow"></div>
+    <div id="googleMap" style="width:100%;height:400px;"></div>
+   
     <script>
       function myMap() {
-        var mapOptions = {
-          map.setCenter(initialLocation);
-          zoom: 10,
-          mapTypeId: google.maps.MapTypeId.HYBRID
-        }
-        var map = new google.maps.Map(document.getElementById("map"), mapOptions);
+        var mapProp= {
+          center:new google.maps.LatLng(51.508742,-0.120850),        
+          zoom:5,     
+        };         
+        var map=new google.maps.Map(document.getElementById("googleMap"),mapProp);
       }
-    </script>
-    
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC3LF6-n6pKpmLkdGR8VZ5SxOOaq0yE2wc&callback=myMap"></script>
+</script>
+
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC3LF6-n6pKpmLkdGR8VZ5SxOOaq0yE2wc&callback=myMap"></script>
     <!-- AIzaSyC3LF6-n6pKpmLkdGR8VZ5SxOOaq0yE2wc -->
     
     <h2>How to Play</h2>
