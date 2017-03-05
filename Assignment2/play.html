@@ -48,14 +48,14 @@
             lng: position.coords.longitude      
           };                                             
             map.setCenter(initialLocation);              
-            var service = new google.maps.places.PlacesService(map);                
+            var service = new google.maps.places.PlacesService(map);                          
             var pyr = initialLocation;             
             var request = {                         
               location: pyr,                 
               radius: '49999',                      
-              query: 'badminton'                 
-          };                           
-            service.textSearch(request, callback);     
+              query: 'badminton'                         
+            };                                      
+            service.textSearch(request, callback);              
           });   
           var mapProp= {              
             zoom:12,            
@@ -72,7 +72,21 @@
       }           
       
       function updateMap(){
-        
+        navigator.geolocation.getCurrentPosition(function (position) {                               
+            var initialLocation = {       
+            lat: position.coords.latitude,      
+            lng: position.coords.longitude      
+          };                                             
+            //map.setCenter(initialLocation);              
+            var service = new google.maps.places.PlacesService(map);                          
+            var pyr = initialLocation;             
+            var request = {                         
+              location: pyr,                 
+              radius: '49999',                      
+              query: 'badminton'                         
+            };                                      
+            service.textSearch(request, callback);              
+          });
       }
                                         
       function callback(results, status) {
