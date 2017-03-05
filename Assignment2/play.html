@@ -54,7 +54,8 @@
     <script>
       function myMap() {
         var mapOptions = {
-          center: new google.maps.LatLng(51.5, -0.12),
+          initialLocation = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+          map.setCenter(initialLocation);
           zoom: 10,
           mapTypeId: google.maps.MapTypeId.HYBRID
         }
