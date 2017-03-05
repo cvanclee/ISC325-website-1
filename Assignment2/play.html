@@ -53,8 +53,9 @@
           infowindow = new google.maps.InfoWindow();      
           var service = new google.maps.places.PlacesService(map);       
           //var pyr = new google.maps.LatLng(initialLocation.lat(),initialLocation.lng());
+          var pyr = {lat: -33.867, lng: 151.195};
           service.nearbySearch({        
-            location: initialLocation,        
+            location: pyr,        
             radius: 500,       
             type: ['badminton']         
           }, callback);
