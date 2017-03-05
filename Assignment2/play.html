@@ -50,20 +50,25 @@
             zoom:12,     
           };         
           map=new google.maps.Map(document.getElementById("googleMap"),mapProp);         
-          infowindow = new google.maps.InfoWindow();      
-          var pyr = {lat: 43.455345, lng: -76.510498};
-          var request = {    
-            location: pyr,
-            radius: '49999',   
-            query: 'badminton'
-          };
-          var service = new google.maps.places.PlacesService(map);       
-          service.textSearch(request, callback);          
+          infowindow = new google.maps.InfoWindow();        
+          makeReq()
+          google.maps.event.addListener(map, 'idle', makeReq());
         } else {
     
         }
       }
       
+      function makeReq(){  
+        var pyr = {lat: 43.455345, lng: -76.510498};         
+        var request = {              
+          location: pyr,        
+          radius: '49999',           
+          query: 'badminton'       
+        };        
+        var service = new google.maps.places.PlacesService(map);               
+        service.textSearch(request, callback);   
+      }                                
+                                        
       function callback(results, status) {
         if (status === google.maps.places.PlacesServiceStatus.OK) {
           for (var i = 0; i < results.length; i++) {
