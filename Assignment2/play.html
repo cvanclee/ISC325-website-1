@@ -72,6 +72,7 @@
       }           
       
       function updateMap(){
+        setMapOnAll(null);
         var initial;
         navigator.geolocation.getCurrentPosition(function (position) {      
           var hlp = map.getCenter();
