@@ -67,13 +67,14 @@
           initialLocation = new google.maps.LatLng(40.7128,-74.0059);
           map.setCenter(initialLocation);  
           infowindow = new google.maps.InfoWindow();      
-          var service = new google.maps.places.PlacesService(map);  
           var pyr = {lat: 40.7128, lng: -74.0059};
-          service.nearbySearch({        
-            location: pyr,        
-            radius: 49999,        
-            type: ['badminton gym']     
-          }, callback);
+          var request = {    
+            location: pyr,
+            radius: '49999',   
+            query: 'badminton'
+          };
+          var service = new google.maps.places.PlacesService(map);       
+          service.textSearch(request, callback);
         }
       }
       
