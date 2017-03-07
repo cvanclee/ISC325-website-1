@@ -1,170 +1,158 @@
 <!DOCTYPE html>
 <html lang="en-US">
-  
-  <head>
-    <style>       
-      iframe{       
-        border-width: 0px;  
-      }      
-    </style>
-    
-    <link rel="stylesheet" type="text/css" href="layout.css">
-    <title>Play Badminton</title>
-    <meta charset="UTF-8">
-    <meta name="description" content="Badminton related stuff">
-    <meta name="keywords" content="Badminton, ISC325, HTML, HTML5, CSS">
-    <meta name="author" content="Christian Van Cleef">
+   <head>
+      <style>       
+         iframe{       
+         border-width: 0px;  
+         }      
+      </style>
+      <link rel="stylesheet" type="text/css" href="layout.css">
+      <title>Play Badminton</title>
+      <meta charset="UTF-8">
+      <meta name="description" content="Badminton related stuff">
+      <meta name="keywords" content="Badminton, ISC325, HTML, HTML5, CSS">
+      <meta name="author" content="Christian Van Cleef">
    </head>
-  
-  <body>
-    
-    
-    <div id="wrapper">
-		<div id="header">
-      <ul>
+   <body>
+      <div id="wrapper">
+         <div id="header">
+            <ul>
                <li><a href="https://cvanclee.github.io/">Assignment Page</a></li>
                <li><a href="landing">Main Page</a></li>
                <li><a href="play">Play</a></li>
                <li><a class="active" href="videos">Videos</a></li>
                <li><a href="rules">Rules</a></li>
             </ul>
+         </div>
+         <div id="content">
+            <h2>Equipment</h2>
+            <p>You need very little personal equipment to play badminton. A racket, sport shoes, and some
+               comfortable clothing are typically all that an individual needs. Rackets can run anywhere from $5-$200+, but
+               a generally good price range for a racket is $50-$100. Indoor sporting shoes have a similar price range. Birdies
+               are generally included at the gym, but a general rule of thumb is to buy Yonex birdies. Plastic
+               ones are cheaper and last longer. Feather birdies go faster and hit better, but break easily and are more expensive.
+               Feathered birdies are always used at the tournament level, but for practice or recreational play, plastic 
+               birdies are generally the better option.
+            </p>
+            <h2>Where to Play</h2>
+            <p>Finding a gym to play in is generally difficult unless you live in a city. Badminton is not
+               terribly popular in the United States, and most recreational centers and gyms do not have any 
+               equipment for badminton. The best way to find a place to play is to contact your local gyms, look
+               online for a local badminton club, or if you are on a campus, check to see if there is a team.
+            </p>
+            <p>Another option is to play outside, outdoor badminton setups are usually very cheap and easy to set up.
+               However, this is only a good idea if you are not interested in playing competitively. Outdoor play
+               is completely different than playing indoors, and is a much less enjoyable experience for serious play.
+            </p>
+            <p>The map below is set to search for any badminton gyms or badminton equipment shops nearby. 
+               <a href="http://www.teamusa.org/usa-badminton/membership/clubs" target="_blank">You
+               can also visit this site to see if you live near any official badminton clubs</a>
+            </p>
+            <script>      
+               var map;
+               var infowindow;
+               var initialLocation;
+                  
+               function getLocation() {                         
+                 if (navigator.geolocation) {              
+                   navigator.geolocation.getCurrentPosition(function (position) {                               
+                     var initialLocation = {               
+                       lat: position.coords.latitude,                 
+                       lng: position.coords.longitude      
+                   };                                                    
+                     map.setCenter(initialLocation);              
+                     var service = new google.maps.places.PlacesService(map);                          
+                     var pyr = initialLocation;             
+                     var request = {                         
+                       location: pyr,                 
+                       radius: '49999',                      
+                       query: 'badminton'                         
+                     };                                      
+                     service.textSearch(request, callback);              
+                   });   
+                   var mapProp= {              
+                     zoom:12,            
+                   };                     
+                   map=new google.maps.Map(document.getElementById("googleMap"),mapProp);                 
+                   infowindow = new google.maps.InfoWindow(); 
+                   
+                   google.maps.event.addListener(map, 'idle', function() {          
+                     updateMap();         
+                   });                    
+                 } else {    
+               
+                 }             
+               }           
+               
+               function updateMap(){
+                 var initial;
+                 navigator.geolocation.getCurrentPosition(function (position) {      
+                   var hlp = map.getCenter();
+                   var initial = {                            
+                     lat: hlp.lat(),                                     
+                     lng: hlp.lng()      
+                   };                                                             
+                     //map.setCenter(initialLocation);              
+                     var service = new google.maps.places.PlacesService(map);                          
+                     var pyrd = initial;             
+                     var request = {                         
+                       location: pyrd,                 
+                       radius: '49999',                      
+                       query: 'badminton'                                
+                     };                                               
+                   service.textSearch(request, callback);                 
+                 });
+               }
+                                                 
+               function callback(results, status) {
+                 if (status === google.maps.places.PlacesServiceStatus.OK) {
+                   for (var i = 0; i < results.length; i++) {
+                     createMarker(results[i]);
+                   }
+                 }
+               }
+               
+               function createMarker(place) {
+                 var placeLoc = place.geometry.location;
+                 var marker = new google.maps.Marker({
+                   map: map,
+                   position: place.geometry.location
+                 });       
+                 google.maps.event.addListener(marker, 'click', function() {
+                   infowindow.setContent(place.name);
+                   infowindow.open(map, this);
+                 });
+               }
+            </script>    
+            <div id="googleMap" style="width:50%;height:500px;"></div>
+            <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC3LF6-n6pKpmLkdGR8VZ5SxOOaq0yE2wc&libraries=places&callback=getLocation"></script>
+            <!-- AIzaSyC3LF6-n6pKpmLkdGR8VZ5SxOOaq0yE2wc -->
+            <h2>How to Play</h2>
+            <a href="rules">You can visit this page for the written rules of the game</a>
+            <p>Or, if you don't feel like reading, you can view the videos below. The
+               first goes over the rules, and the second goes over form and footwork.
+            </p>
+            <p style="font-size:125%;">Rules: </p>
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/UyLIi-TbcFc?ecver=1" allowfullscreen></iframe>
+            <p style="font-size:125%;">Form/Footwork: </p>
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/1UIhKZCPMYM?ecver=1" allowfullscreen></iframe>
+         </div>
+         <div id="footer">
+         </div>
       </div>
-      
-		<div id="content">
-      
-    
-    <h2>Equipment</h2>
-    <p>You need very little personal equipment to play badminton. A racket, sport shoes, and some
-    comfortable clothing are typically all that an individual needs. Rackets can run anywhere from $5-$200+, but
-    a generally good price range for a racket is $50-$100. Indoor sporting shoes have a similar price range. Birdies
-    are generally included at the gym, but a general rule of thumb is to buy Yonex birdies. Plastic
-    ones are cheaper and last longer. Feather birdies go faster and hit better, but break easily and are more expensive.
-    Feathered birdies are always used at the tournament level, but for practice or recreational play, plastic 
-    birdies are generally the better option.</p>
-    
-    <h2>Where to Play</h2>
-    <p>Finding a gym to play in is generally difficult unless you live in a city. Badminton is not
-    terribly popular in the United States, and most recreational centers and gyms do not have any 
-    equipment for badminton. The best way to find a place to play is to contact your local gyms, look
-    online for a local badminton club, or if you are on a campus, check to see if there is a team.</p>
-    <p>Another option is to play outside, outdoor badminton setups are usually very cheap and easy to set up.
-    However, this is only a good idea if you are not interested in playing competitively. Outdoor play
-    is completely different than playing indoors, and is a much less enjoyable experience for serious play.</p>
-    <p>The map below is set to search for any badminton gyms or badminton equipment shops nearby. 
-    <a href="http://www.teamusa.org/usa-badminton/membership/clubs" target="_blank">You
-    can also visit this site to see if you live near any official badminton clubs</a></p>
-    
-    <script>      
-      var map;
-      var infowindow;
-      var initialLocation;
-         
-      function getLocation() {                         
-        if (navigator.geolocation) {              
-          navigator.geolocation.getCurrentPosition(function (position) {                               
-            var initialLocation = {               
-              lat: position.coords.latitude,                 
-              lng: position.coords.longitude      
-          };                                                    
-            map.setCenter(initialLocation);              
-            var service = new google.maps.places.PlacesService(map);                          
-            var pyr = initialLocation;             
-            var request = {                         
-              location: pyr,                 
-              radius: '49999',                      
-              query: 'badminton'                         
-            };                                      
-            service.textSearch(request, callback);              
-          });   
-          var mapProp= {              
-            zoom:12,            
-          };                     
-          map=new google.maps.Map(document.getElementById("googleMap"),mapProp);                 
-          infowindow = new google.maps.InfoWindow(); 
-          
-          google.maps.event.addListener(map, 'idle', function() {          
-            updateMap();         
-          });                    
-        } else {    
-   
-        }             
-      }           
-      
-      function updateMap(){
-        var initial;
-        navigator.geolocation.getCurrentPosition(function (position) {      
-          var hlp = map.getCenter();
-          var initial = {                            
-            lat: hlp.lat(),                                     
-            lng: hlp.lng()      
-          };                                                             
-            //map.setCenter(initialLocation);              
-            var service = new google.maps.places.PlacesService(map);                          
-            var pyrd = initial;             
-            var request = {                         
-              location: pyrd,                 
-              radius: '49999',                      
-              query: 'badminton'                                
-            };                                               
-          service.textSearch(request, callback);                 
-        });
-      }
-                                        
-      function callback(results, status) {
-        if (status === google.maps.places.PlacesServiceStatus.OK) {
-          for (var i = 0; i < results.length; i++) {
-            createMarker(results[i]);
-          }
-        }
-      }
-      
-      function createMarker(place) {
-        var placeLoc = place.geometry.location;
-        var marker = new google.maps.Marker({
-          map: map,
-          position: place.geometry.location
-        });       
-        google.maps.event.addListener(marker, 'click', function() {
-          infowindow.setContent(place.name);
-          infowindow.open(map, this);
-        });
-      }
-    </script>    
-    <div id="googleMap" style="width:50%;height:500px;"></div>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC3LF6-n6pKpmLkdGR8VZ5SxOOaq0yE2wc&libraries=places&callback=getLocation"></script>
-    <!-- AIzaSyC3LF6-n6pKpmLkdGR8VZ5SxOOaq0yE2wc -->
-    
-    <h2>How to Play</h2>
-    <a href="rules">You can visit this page for the written rules of the game</a>
-    <p>Or, if you don't feel like reading, you can view the videos below. The
-    first goes over the rules, and the second goes over form and footwork.</p>
-    <p style="font-size:125%;">Rules: </p>
-    <iframe width="560" height="315" src="https://www.youtube.com/embed/UyLIi-TbcFc?ecver=1" allowfullscreen></iframe>
-    <p style="font-size:125%;">Form/Footwork: </p>
-    <iframe width="560" height="315" src="https://www.youtube.com/embed/1UIhKZCPMYM?ecver=1" allowfullscreen></iframe>
-      </div>
-      
-		<div id="footer">
-      
-      </div>
-	
-    </div>
-    
-    
-    
-    <address>
-      <p style=" position: relative; bottom: 0; left: 0; width: 100%; text-align: left;">
-      <br><br><br>
-      ---------------------------------------<br>
-      Written by Christian Van Cleef.<br> 
-      Hobby page for badminton<br>
-      Created for a hypermedia design class<br>
-      at SUNY Oswego<br>
-      Hosted on GitHub by GitHub Pages<br>
-      Source at: <a href="https://github.com/cvanclee/cvanclee.github.io" target="_blank">https://github.com/cvanclee/cvanclee.github.io</a><br>
-      Contact: cvanclee@oswego.edu<br>
-      ---------------------------------------</p>
-    </address>
-    
-  </body>
+      <address>
+         <p style=" position: relative; bottom: 0; left: 0; width: 100%; text-align: left;">
+            <br><br><br>
+            ---------------------------------------<br>
+            Written by Christian Van Cleef.<br> 
+            Hobby page for badminton<br>
+            Created for a hypermedia design class<br>
+            at SUNY Oswego<br>
+            Hosted on GitHub by GitHub Pages<br>
+            Source at: <a href="https://github.com/cvanclee/cvanclee.github.io" target="_blank">https://github.com/cvanclee/cvanclee.github.io</a><br>
+            Contact: cvanclee@oswego.edu<br>
+            ---------------------------------------
+         </p>
+      </address>
+   </body>
 </html>
